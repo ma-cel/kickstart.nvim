@@ -29,11 +29,6 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 
 return {
-  {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
-  },
   { 'EmranMR/tree-sitter-blade' },
   {
     'ricardoramirezr/blade-nav.nvim',
