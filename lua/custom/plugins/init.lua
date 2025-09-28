@@ -18,6 +18,7 @@ vim.keymap.set('n', 'q', 'b')
 vim.keymap.set('n', 'Q', 'B')
 vim.keymap.set('n', 'x', '"_x')
 vim.keymap.set('n', '<leader><tab>', ':b#<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]arch [T]odos' })
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -26,22 +27,6 @@ vim.opt.expandtab = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
-
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-parser_config.blade = {
-  install_info = {
-    url = 'https://github.com/EmranMR/tree-sitter-blade',
-    files = { 'src/parser.c' },
-    branch = 'main',
-  },
-  filetype = 'blade',
-}
-
-vim.filetype.add {
-  pattern = {
-    ['.*%.blade%.php'] = 'blade',
-  },
-}
 
 return {
   {
@@ -52,10 +37,25 @@ return {
   { 'EmranMR/tree-sitter-blade' },
   {
     'ricardoramirezr/blade-nav.nvim',
-    dependencies = {
-      'hrsh7th/nvim-cmp', -- if using nvim-cmp
-      { 'ms-jpq/coq_nvim', branch = 'coq' }, -- if using coq
-    },
+    dependencies = {},
     ft = { 'blade', 'php' }, -- optional, improves startup time
+  },
+  {
+    'olimorris/codecompanion.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+  },
+  {
+    'OXY2DEV/markview.nvim',
+    lazy = false,
+    opts = {
+      preview = {
+        filetypes = { 'markdown', 'codecompanion' },
+        ignore_buftypes = {},
+      },
+    },
   },
 }
