@@ -53,4 +53,35 @@ return {
       },
     },
   },
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    opts = {
+      transparent = true,
+      colors = {
+        theme = {
+          -- wirkt für alle Varianten (wave/dragon/lotus)
+          all = { ui = { bg_gutter = 'none' } },
+          -- zur Sicherheit auch spezifisch für wave:
+          wave = { ui = { bg_gutter = 'none' } },
+        },
+      },
+      -- falls irgendein Plugin/Gruppen-Namen den Gutter trotzdem färbt:
+      overrides = function(colors)
+        return {
+          SignColumn = { bg = 'none' },
+          LineNr = { bg = 'none' },
+          GitSignsAdd = { bg = 'none' },
+          GitSignsChange = { bg = 'none' },
+          GitSignsDelete = { bg = 'none' },
+          FoldColumn = { bg = 'none' },
+        }
+      end,
+    },
+    config = function(_, opts)
+      require('kanagawa').setup(opts) -- <- wichtig!
+      vim.cmd.colorscheme 'kanagawa-wave'
+      vim.api.nvim_set_hl(0, 'LineNr', { fg = '#a9a788', bg = 'none' })
+    end,
+  },
 }

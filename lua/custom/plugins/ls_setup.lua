@@ -24,7 +24,7 @@ local vue_ls_config = {}
 vim.lsp.config('sourcekit', {
   cmd = { 'sourcekit-lsp' },
   filetypes = { 'swift' },
-  root_markers = { 'Package.swift', '.git', '*.xcodeproj', '*.xcworkspace' },
+  root_markers = { '*.xcodeproj', '*.xcworkspace', 'Package.swift', '.git' },
   capabilities = {
     workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
   },
